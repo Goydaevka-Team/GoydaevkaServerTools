@@ -1,5 +1,10 @@
 // Add any additional repositories for your dependencies here.
 
 repositories {
-
+    maven { url = uri("https://maven.minecraftforge.net/") }
+    maven { url = uri("https://plugins.gradle.org/m2") }
+    maven {url = uri("https://jitpack.io")}
+    maven {url = uri("https://maven.cil.li/")}
+    maven {url = uri("https://modmaven.dev")}
+    maven {url = uri("https://gregtech.mechaenetia.com/")}
 }

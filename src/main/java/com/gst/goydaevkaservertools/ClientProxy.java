@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package com.gst.goydaevkaservertools;
 
 public class ClientProxy extends CommonProxy {
 
