@@ -1,8 +1,9 @@
 package com.gst.goydaevkaservertools;
 
-import com.gst.goydaevkaservertools.commands.CreateBedrockOreCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.gst.goydaevkaservertools.commands.CreateBedrockOreCommand;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
