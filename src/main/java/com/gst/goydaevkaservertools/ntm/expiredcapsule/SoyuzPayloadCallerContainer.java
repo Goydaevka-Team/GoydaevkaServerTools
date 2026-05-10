@@ -1,5 +1,6 @@
 package com.gst.goydaevkaservertools.ntm.expiredcapsule;
 
+import com.hbm.entity.missile.EntitySoyuzCapsule;
 import com.hbm.tileentity.machine.storage.TileEntitySoyuzCapsule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
