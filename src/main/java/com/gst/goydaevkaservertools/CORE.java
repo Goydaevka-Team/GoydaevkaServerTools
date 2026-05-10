@@ -1,5 +1,11 @@
 package com.gst.goydaevkaservertools;
 
+import com.gst.goydaevkaservertools.commands.SoyuzPayloadCallerCommand;
+import com.gst.goydaevkaservertools.ntm.expiredcapsule.ExpiredSoyuzEntityCapsule;
+import com.gst.goydaevkaservertools.ntm.expiredcapsule.SoyuzPayloadCallerGUIHandler;
+import com.hbm.entity.EntityMappings;
+import com.hbm.util.Tuple;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +21,10 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 @Mod(modid = "goydaevkaservertools", name = "Goydaevka Server Tools", version = Tags.VERSION)
 public class CORE {
 
-    public static final String MODID = "mymodid";
+    @Mod.Instance("goydaevkaservertools")
+    public static CORE instance;
+
+    public static final String MODID = "goydaevkaservertools";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     @SidedProxy(
@@ -28,6 +37,8 @@ public class CORE {
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new SoyuzPayloadCallerGUIHandler());
+        EntityMappings.entityMappings.add(new Tuple.Quartet<>(ExpiredSoyuzEntityCapsule.class,"expired_soyuz_capsule",1000, true));
     }
 
     @Mod.EventHandler
@@ -47,5 +58,6 @@ public class CORE {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CreateBedrockOreCommand());
+        event.registerServerCommand(new SoyuzPayloadCallerCommand());
     }
 }
