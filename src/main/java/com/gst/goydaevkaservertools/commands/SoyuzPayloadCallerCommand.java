@@ -33,8 +33,8 @@ public class SoyuzPayloadCallerCommand extends CommandBase {
         EntityPlayerMP entityplayermp = getCommandSenderAsPlayer(sender);
 
         int x = (int)func_110666_a(sender, entityplayermp.posX, args[0]);
-        int y = (int)func_110666_a(sender, entityplayermp.posY, args[0]);
-        int z = (int)func_110666_a(sender, entityplayermp.posZ, args[1]);
+        int y = (int)func_110666_a(sender, entityplayermp.posY, args[1]);
+        int z = (int)func_110666_a(sender, entityplayermp.posZ, args[2]);
 
 
 

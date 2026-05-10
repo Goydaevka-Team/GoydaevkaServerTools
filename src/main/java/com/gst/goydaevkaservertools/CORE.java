@@ -6,6 +6,7 @@ import com.gst.goydaevkaservertools.ntm.expiredcapsule.SoyuzPayloadCallerGUIHand
 import com.hbm.entity.EntityMappings;
 import com.hbm.util.Tuple;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,7 +39,10 @@ public class CORE {
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new SoyuzPayloadCallerGUIHandler());
+
         EntityMappings.entityMappings.add(new Tuple.Quartet<>(ExpiredSoyuzEntityCapsule.class,"expired_soyuz_capsule",1000, true));
+
+
     }
 
     @Mod.EventHandler
