@@ -1,12 +1,16 @@
 package com.gst.goydaevkaservertools;
 
 import com.gst.goydaevkaservertools.commands.SoyuzPayloadCallerCommand;
+import com.gst.goydaevkaservertools.goydaevka.dogtag.ItemDogtag;
+import com.gst.goydaevkaservertools.goydaevka.dogtag.PlayerDiedDogtagHandler;
 import com.gst.goydaevkaservertools.ntm.expiredcapsule.ExpiredSoyuzEntityCapsule;
 import com.gst.goydaevkaservertools.ntm.expiredcapsule.SoyuzPayloadCallerGUIHandler;
 import com.hbm.entity.EntityMappings;
 import com.hbm.util.Tuple;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +46,10 @@ public class CORE {
 
         EntityMappings.entityMappings.add(new Tuple.Quartet<>(ExpiredSoyuzEntityCapsule.class,"expired_soyuz_capsule",1000, true));
 
+        ItemDogtag.DOGTAG = new ItemDogtag();
+        GameRegistry.registerItem(ItemDogtag.DOGTAG, "dogtag", MODID);
 
+        MinecraftForge.EVENT_BUS.register(new PlayerDiedDogtagHandler());
     }
 
     @Mod.EventHandler
