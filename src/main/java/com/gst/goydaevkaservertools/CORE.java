@@ -1,5 +1,11 @@
 package com.gst.goydaevkaservertools;
 
+import net.minecraftforge.common.MinecraftForge;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.gst.goydaevkaservertools.commands.CreateBedrockOreCommand;
 import com.gst.goydaevkaservertools.commands.SoyuzPayloadCallerCommand;
 import com.gst.goydaevkaservertools.goydaevka.dogtag.ItemDogtag;
 import com.gst.goydaevkaservertools.goydaevka.dogtag.PlayerDiedDogtagHandler;
@@ -7,14 +13,6 @@ import com.gst.goydaevkaservertools.ntm.expiredcapsule.ExpiredSoyuzEntityCapsule
 import com.gst.goydaevkaservertools.ntm.expiredcapsule.SoyuzPayloadCallerGUIHandler;
 import com.hbm.entity.EntityMappings;
 import com.hbm.util.Tuple;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.gst.goydaevkaservertools.commands.CreateBedrockOreCommand;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -22,6 +20,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "goydaevkaservertools", name = "Goydaevka Server Tools", version = Tags.VERSION)
 public class CORE {
@@ -44,7 +44,8 @@ public class CORE {
         proxy.preInit(event);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new SoyuzPayloadCallerGUIHandler());
 
-        EntityMappings.entityMappings.add(new Tuple.Quartet<>(ExpiredSoyuzEntityCapsule.class,"expired_soyuz_capsule",1000, true));
+        EntityMappings.entityMappings
+            .add(new Tuple.Quartet<>(ExpiredSoyuzEntityCapsule.class, "expired_soyuz_capsule", 1000, true));
 
         ItemDogtag.DOGTAG = new ItemDogtag();
         GameRegistry.registerItem(ItemDogtag.DOGTAG, "dogtag", MODID);
