@@ -2,12 +2,13 @@ package com.gst.goydaevkaservertools.goydaevka.dogtag;
 
 import java.util.List;
 
-import com.gst.goydaevkaservertools.CORE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+
+import com.gst.goydaevkaservertools.CORE;
 
 public class ItemDogtag extends Item {
 
@@ -17,7 +18,6 @@ public class ItemDogtag extends Item {
         ItemStack stack = new ItemStack(DOGTAG);
 
         NBTTagCompound nbt = new NBTTagCompound();
-
 
         boolean isNotPVP = false;
         EntityPlayer killer = null;
@@ -41,7 +41,7 @@ public class ItemDogtag extends Item {
 
         String deathReason;
 
-        if (killer != null){
+        if (killer != null) {
             deathReason = "Боестолкновение с игроком" + killer.getDisplayName();
 
         } else {
@@ -49,7 +49,7 @@ public class ItemDogtag extends Item {
         }
 
         nbt.setString("ReasonOfDeath", deathReason);
-        nbt.setBoolean("IsGainedByPVP", killer != null );
+        nbt.setBoolean("IsGainedByPVP", killer != null);
 
         stack.setTagCompound(nbt);
         return stack;
@@ -71,15 +71,14 @@ public class ItemDogtag extends Item {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
 
-
-        if (stack.getTagCompound() == null){
+        if (stack.getTagCompound() == null) {
             CORE.LOG.info("RECREATING NBT TAG");
             stack.setTagCompound(new NBTTagCompound());
         }
 
         NBTTagCompound nbt = stack.getTagCompound();
 
-        if (nbt.getString("ReasonOfDeath") == "Боестолкновение с игроком " + player.getDisplayName()){
+        if (nbt.getString("ReasonOfDeath") == "Боестолкновение с игроком " + player.getDisplayName()) {
             list.add("МЫ ОБА ЗНАЕМ, КТО В ЭТОМ ВИНОВАТ, НЕ ТАК ЛИ, " + player.getDisplayName() + "?");
         }
         list.add("Причина смерти: " + nbt.getString("ReasonOfDeath"));

@@ -1,9 +1,5 @@
 package com.gst.goydaevkaservertools;
 
-import com.gst.goydaevkaservertools.wgcore.ExpansionFlagCrafHandler;
-import com.wdg.wgcore.WGCore;
-import com.wdg.wgcore.flag.WgcFlagRegistry;
-import com.wdg.wgcore.flag.model.WgcFlagType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -18,6 +14,8 @@ import com.gst.goydaevkaservertools.ntm.expiredcapsule.ExpiredSoyuzEntityCapsule
 import com.gst.goydaevkaservertools.ntm.expiredcapsule.SoyuzPayloadCallerGUIHandler;
 import com.hbm.entity.EntityMappings;
 import com.hbm.util.Tuple;
+import com.wdg.wgcore.flag.WgcFlagRegistry;
+import com.wdg.wgcore.flag.model.WgcFlagType;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -55,8 +53,6 @@ public class CORE {
         ItemDogtag.DOGTAG = new ItemDogtag();
         GameRegistry.registerItem(ItemDogtag.DOGTAG, "dogtag", MODID);
 
-
-
         MinecraftForge.EVENT_BUS.register(new PlayerDiedDogtagHandler());
 
         proxy.preInit(event);
@@ -73,7 +69,7 @@ public class CORE {
     public void postInit(FMLPostInitializationEvent event) {
         GameRegistry.addRecipe(
             new ItemStack(WgcFlagRegistry.getItemForType(WgcFlagType.EXPANSION), 1),
-            new Object[]{
+            new Object[] {
 
                 "   ", " Y ", "   ",
 

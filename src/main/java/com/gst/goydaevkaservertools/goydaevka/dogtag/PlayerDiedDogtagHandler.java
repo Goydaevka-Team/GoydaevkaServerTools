@@ -1,11 +1,11 @@
 package com.gst.goydaevkaservertools.goydaevka.dogtag;
 
-import com.gst.goydaevkaservertools.CORE;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+
+import com.gst.goydaevkaservertools.CORE;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
