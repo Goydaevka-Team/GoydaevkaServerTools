@@ -1,5 +1,10 @@
 package com.gst.goydaevkaservertools;
 
+import com.gst.goydaevkaservertools.wgcore.ExpansionFlagCrafHandler;
+import com.wdg.wgcore.WGCore;
+import com.wdg.wgcore.flag.WgcFlagRegistry;
+import com.wdg.wgcore.flag.model.WgcFlagType;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.LogManager;
@@ -50,7 +55,11 @@ public class CORE {
         ItemDogtag.DOGTAG = new ItemDogtag();
         GameRegistry.registerItem(ItemDogtag.DOGTAG, "dogtag", MODID);
 
+
+
         MinecraftForge.EVENT_BUS.register(new PlayerDiedDogtagHandler());
+
+        proxy.preInit(event);
     }
 
     @Mod.EventHandler
@@ -62,6 +71,16 @@ public class CORE {
     @Mod.EventHandler
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
+        GameRegistry.addRecipe(
+            new ItemStack(WgcFlagRegistry.getItemForType(WgcFlagType.EXPANSION), 1),
+            new Object[]{
+
+                "   ", " Y ", "   ",
+
+                ('Y'), ItemDogtag.DOGTAG
+
+            });
+
         proxy.postInit(event);
     }
 

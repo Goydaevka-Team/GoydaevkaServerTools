@@ -37,4 +37,5 @@ dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
     compileOnly("com.github.HbmMods:Hbm-s-Nuclear-Tech-GIT:1.0.27_X5671")
     runtimeOnlyNonPublishable("com.github.HbmMods:Hbm-s-Nuclear-Tech-GIT:1.0.27_X5671")
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/WGC.jar")))
 }

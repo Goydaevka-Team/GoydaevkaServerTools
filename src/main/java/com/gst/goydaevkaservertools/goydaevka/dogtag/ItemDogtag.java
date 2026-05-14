@@ -2,6 +2,7 @@ package com.gst.goydaevkaservertools.goydaevka.dogtag;
 
 import java.util.List;
 
+import com.gst.goydaevkaservertools.CORE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,10 +15,43 @@ public class ItemDogtag extends Item {
 
     public static ItemStack CreateItemStackFromPlayer(EntityPlayer player, DamageSource damageSource) {
         ItemStack stack = new ItemStack(DOGTAG);
-        stack.setTagCompound(new NBTTagCompound());
+
+        NBTTagCompound nbt = new NBTTagCompound();
+
+
+        boolean isNotPVP = false;
+        EntityPlayer killer = null;
+
+        if (damageSource.getEntity() instanceof EntityPlayer) {
+            killer = (EntityPlayer) damageSource.getEntity();
+            // Проверка на самоубийство (игрок убил самого себя)
+            if (killer == player) {
+                isNotPVP = true;
+                killer = null;
+            }
+        } else if (damageSource.getSourceOfDamage() instanceof EntityPlayer) {
+            killer = (EntityPlayer) damageSource.getSourceOfDamage();
+            if (killer == player) {
+                isNotPVP = true;
+                killer = null;
+            }
+        }
         String itemName = "Жетон игрока " + player.getDisplayName();
-        stack.getTagCompound()
-            .setString("CustomName", itemName);
+        nbt.setString("CustomName", itemName);
+
+        String deathReason;
+
+        if (killer != null){
+            deathReason = "Боестолкновение с игроком" + killer.getDisplayName();
+
+        } else {
+            deathReason = "Естественный отбор";
+        }
+
+        nbt.setString("ReasonOfDeath", deathReason);
+        nbt.setBoolean("IsGainedByPVP", killer != null );
+
+        stack.setTagCompound(nbt);
         return stack;
     }
 
@@ -36,9 +70,21 @@ public class ItemDogtag extends Item {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
-        super.addInformation(stack, player, list, advanced);
 
-        list.add("Опредленно, для кого то эти жетоны могут представлять особую ценность...");
+
+        if (stack.getTagCompound() == null){
+            CORE.LOG.info("RECREATING NBT TAG");
+            stack.setTagCompound(new NBTTagCompound());
+        }
+
+        NBTTagCompound nbt = stack.getTagCompound();
+
+        if (nbt.getString("ReasonOfDeath") == "Боестолкновение с игроком " + player.getDisplayName()){
+            list.add("МЫ ОБА ЗНАЕМ, КТО В ЭТОМ ВИНОВАТ, НЕ ТАК ЛИ, " + player.getDisplayName() + "?");
+        }
+        list.add("Причина смерти: " + nbt.getString("ReasonOfDeath"));
+
+        super.addInformation(stack, player, list, advanced);
     }
 
     public ItemDogtag() {
